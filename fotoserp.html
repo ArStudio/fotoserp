@@ -1,11 +1,22 @@
 <html>
     <head>
         <title>{Title}</title>
+        <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="{Favicon}">
         <link rel="alternate" type="application/rss+xml" href="{RSS}">
         {block:Description}
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+        <style type="text/css">
+        body {font-family: Geneva, Arial, Helvetica, sans-serif; padding: 10px}
+        h1 {display: none}
+        .grid-item {width: 320px; padding: 10px; background-color: #eaedee; margin-bottom: 10px; margin-right: 10px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.6}
+        .grid-item img {width: 300px; height: auto; padding-bottom: 10px}
+        .grid-item h3 a {font-size: 10px; text-decoration: none}
+        .grid-item a {color: #7f929c}
+        #footer a {color: #7f929c}
+        </style>
     </head>
     <body>
         <h1>{Title}</h1>
@@ -14,53 +25,53 @@
             <p id="description">{Description}</p>
         {/block:Description}
 
-        <ol id="posts">
+        <div class="grid js-masonry" data-masonry-options='{ "itemSelector": ".grid-item" }'>
             {block:Posts}{block:Text}
-                    <li class="post text">
+                    <div class="grid-item">
                         {block:Title}
                             <h3><a href="{Permalink}">{Title}</a></h3>
                         {/block:Title}{Body}
-                    </li>
+                    </div>
                 {/block:Text}{block:Photo}
-                    <li class="post photo">
+                    <div class="grid-item">
                         <img src="{PhotoURL-500}" alt="{PhotoAlt}"/>
 
                         {block:Caption}
                             <div class="caption">{Caption}</div>
                         {/block:Caption}
-                    </li>
+                    </div>
                 {/block:Photo}{block:Panorama}
-                    <li class="post panorama">
+                    <div class="grid-item">
                         {LinkOpenTag}
                             <img src="{PhotoURL-Panorama}" alt="{PhotoAlt}"/>
                         {LinkCloseTag}{block:Caption}
                             <div class="caption">{Caption}</div>
                         {/block:Caption}
-                    </li>
+                    </div>
                 {/block:Panorama}{block:Photoset}
-                    <li class="post photoset">
+                    <div class="grid-item">
                         {Photoset-500}{block:Caption}
                             <div class="caption">{Caption}</div>
                         {/block:Caption}
-                    </li>
+                    </div>
                 {/block:Photoset}{block:Quote}
-                    <li class="post quote">
+                    <div class="grid-item">
                         "{Quote}"
 
                         {block:Source}
                             <div class="source">{Source}</div>
                         {/block:Source}
-                    </li>
+                    </div>
                 {/block:Quote}{block:Link}
-                    <li class="post link">
+                    <div class="grid-item">
                         <a href="{URL}" class="link" {Target}>{Name}</a>
 
                         {block:Description}
                             <div class="description">{Description}</div>
                         {/block:Description}
-                    </li>
+                    </div>
                 {/block:Link}{block:Chat}
-                    <li class="post chat">
+                    <div class="grid-item">
                         {block:Title}
                             <h3><a href="{Permalink}">{Title}</a></h3>
                         {/block:Title}
@@ -74,21 +85,21 @@
                                 </li>
                             {/block:Lines}
                         </ul>
-                    </li>
+                    </div>
                 {/block:Chat}{block:Video}
-                    <li class="post video">
+                    <div class="grid-item">
                         {Video-500}{block:Caption}
                             <div class="caption">{Caption}</div>
                         {/block:Caption}
-                    </li>
+                    </div>
                 {/block:Video}{block:Audio}
-                    <li class="post audio">
+                    <div class="grid-item">
                         {AudioEmbed}{block:Caption}
                             <div class="caption">{Caption}</div>
                         {/block:Caption}
-                    </li>
+                    </div>
                 {/block:Audio}{/block:Posts}
-        </ol>
+        </div>
 
         <p id="footer">
             {block:PreviousPage}
@@ -96,8 +107,6 @@
             {/block:PreviousPage}{block:NextPage}
                 <a href="{NextPage}">Next &#187;</a>
             {/block:NextPage}
-
-            <a href="/archive">Archive</a>
         </p>
     </body>
 </html>
