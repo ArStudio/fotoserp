@@ -8,6 +8,13 @@
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
+        <script>
+        var container = document.querySelector('.grid js-masonry');
+        var msnry;
+        imagesLoaded( container, function() {
+        	msnry = new Masonry( container );
+        });
+        </script>
         <style type="text/css">
         body {font-family: Geneva, Arial, Helvetica, sans-serif; padding: 10px}
         h1 {display: none}
@@ -102,11 +109,15 @@
         </div>
 
         <p id="footer">
-            {block:PreviousPage}
-                <a href="{PreviousPage}">&#171; Previous</a>
-            {/block:PreviousPage}{block:NextPage}
-                <a href="{NextPage}">Next &#187;</a>
-            {/block:NextPage}
+            {block:Pagination}{block:PreviousPage}
+                <a href="{PreviousPage}">Previous</a>
+            {/block:PreviousPage}{block:JumpPagination length="5"}{block:CurrentPage}
+                    <span class="current_page">{PageNumber}</span>
+                {/block:CurrentPage}{block:JumpPage}
+                    <a class="jump_page" href="{URL}">{PageNumber}</a>
+                {/block:JumpPage}{/block:JumpPagination}{block:NextPage}
+                <a href="{NextPage}">Next</a>
+            {/block:NextPage}{/block:Pagination}
         </p>
     </body>
 </html>
