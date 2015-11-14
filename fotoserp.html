@@ -7,23 +7,18 @@
         {block:Description}
             <meta name="description" content="{MetaDescription}" />
         {/block:Description}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.2/masonry.pkgd.min.js"></script>
-        <script>
-        var container = document.querySelector('.grid js-masonry');
-        var msnry;
-        imagesLoaded( container, function() {
-        	msnry = new Masonry( container );
-        });
-        </script>
         <style type="text/css">
-        body {font-family: Geneva, Arial, Helvetica, sans-serif; padding: 10px}
+        body {font-family: Geneva, Arial, Helvetica, sans-serif; padding: 0px; margin: 0px}
         h1 {display: none}
-        .grid-item {width: 320px; padding: 10px; background-color: #eaedee; margin-bottom: 10px; margin-right: 10px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.6}
-        .grid-item img {width: 300px; height: auto; padding-bottom: 10px}
-        .grid-item h3 a {font-size: 10px; text-decoration: none}
-        .grid-item a {color: #7f929c}
-        #footer a {color: #7f929c}
-        </style>
+        .grid {margin: 0 auto;}
+        .grid-item {width: 300px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis}
+        .grid-item img {width: 300px; height: auto; padding-top: 5px; padding-bottom: 5px}
+        .grid-item h3 {font-size: 10px; margin: 0px}
+        .grid-item h3 a {text-decoration: none}
+        .grid-item a {color: #999}
+        #footer {text-align: center}
+        #footer a {color: #999}
+      </style>
     </head>
     <body>
         <h1>{Title}</h1>
@@ -31,8 +26,7 @@
         {block:Description}
             <p id="description">{Description}</p>
         {/block:Description}
-
-        <div class="grid js-masonry" data-masonry-options='{ "itemSelector": ".grid-item" }'>
+        <div class="grid">
             {block:Posts}{block:Text}
                     <div class="grid-item">
                         {block:Title}
@@ -119,5 +113,32 @@
                 <a href="{NextPage}">Next</a>
             {/block:NextPage}{/block:Pagination}
         </p>
-    </body>
+
+<script type="text/javascript" src="http://alves.im/minigrid/minigrid.js"></script>
+
+<script>
+(function(){
+
+  function grid() {
+    minigrid({
+      container: '.grid',
+      item: '.grid-item',
+      gutter: 20
+    });
+  }
+
+  window.addEventListener('resize', function(){
+  minigrid({
+    container: '.grid',
+    item: '.grid-item',
+    gutter: 20
+  });
+});
+
+  grid();
+
+})();
+</script>
+
+</body>
 </html>
